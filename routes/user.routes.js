@@ -12,5 +12,10 @@ router.get("/me", verifyToken, userController.getLoggedInUser);
 router.post("/reset-password", userController.resetPassword);
 router.post("/request-password-reset", userController.requestPasswordReset);
 router.post("/logout", userController.logout);
+router.post(
+  "/edit",
+//   verifyToken,
+  userController.editUserNotificationPreferences
+);
 
 module.exports = router;

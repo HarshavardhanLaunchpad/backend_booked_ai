@@ -51,6 +51,20 @@ const UserSchema = mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
+    notifications: {
+      email: {
+        type: Boolean,
+        default: true,
+      },
+      push: {
+        type: Boolean,
+        default: false,
+      },
+      sms: {
+        type: Boolean,
+        default: false,
+      },
+    },
   },
   {
     timestamps: true,
