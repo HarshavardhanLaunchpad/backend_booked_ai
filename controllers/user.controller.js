@@ -187,6 +187,28 @@ const resetPassword = async (req, res) => {
   }
 };
 
+// Controller to get logged-in user details
+const editUserNotificationPreferences = async (req, res) => {
+  try {
+    // The user's ID is available in the request object after authentication middleware
+    const { userId, email, sms, push } = req.body;
+
+    // Find the user by ID and exclude the password field from the response
+    const user = await User.findById(userId, { notifications: 1 });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    user.notifications = { email, sms, push };
+    await user.save();
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Server error", message: error.message });
+  }
+};
+
 module.exports = {
   signup,
   deleteUserById,
@@ -196,4 +218,5 @@ module.exports = {
   getLoggedInUser,
   resetPassword,
   logout,
+  editUserNotificationPreferences,
 };
