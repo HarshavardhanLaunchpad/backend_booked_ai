@@ -14,7 +14,7 @@ router.post("/request-password-reset", userController.requestPasswordReset);
 router.post("/logout", userController.logout);
 router.post(
   "/edit",
-//   verifyToken,
+  verifyToken,
   userController.editUserNotificationPreferences
 );
 
